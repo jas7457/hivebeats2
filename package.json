@@ -1,0 +1,33 @@
+{
+	"name": "hivebeats2",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"dev": "next",
+		"build": "next build",
+		"start": "next start"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jas7457/hivebeats2.git"
+	},
+	"dependencies": {
+		"next": "^9.2.1",
+		"react": "^16.12.0",
+		"react-dom": "^16.12.0"
+	},
+	"devDependencies": {
+		"@types/node": "^13.7.0",
+		"@types/react": "^16.9.19",
+		"prettier": "^1.19.1",
+		"typescript": "^3.7.5"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/jas7457/hivebeats2/issues"
+	},
+	"homepage": "https://github.com/jas7457/hivebeats2#readme",
+	"description": ""
+}
