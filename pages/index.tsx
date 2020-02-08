@@ -1,5 +1,15 @@
 import React from 'react';
 
-export default function Index() {
-	return <div>Hello world</div>;
+import { withApollo } from '../lib/apollo';
+import PostList from '../components/PostList';
+
+function Index() {
+	return (
+		<div>
+			<div>Hello world</div>
+			<PostList />
+		</div>
+	);
 }
+
+export default withApollo()(Index);
