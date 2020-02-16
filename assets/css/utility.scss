@@ -1,0 +1,112 @@
+/**** Display-related ****/
+.flex {
+	display: flex;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.flex-grow {
+	flex-grow: 1;
+}
+
+.flex-shrink {
+	flex-shrink: 1;
+}
+
+.flex-no-shrink {
+	flex-shrink: 0;
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+.align-center {
+	align-items: center;
+}
+
+.justify-space-between {
+	justify-content: space-between;
+}
+
+.justify-center {
+	justify-content: center;
+}
+
+.overflow-hidden {
+	overflow: hidden;
+}
+
+.w-full {
+	width: 100%;
+}
+
+.h-full {
+	height: 100%;
+}
+
+.block {
+	display: block;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+/**** Positioning ****/
+.ml-auto {
+	margin-left: auto;
+}
+
+.mr-auto {
+	margin-right: auto;
+}
+
+.relative {
+	position: relative;
+}
+
+.absolute {
+	position: absolute;
+}
+
+.top-0 {
+	top: 0;
+}
+
+.left-0 {
+	left: 0;
+}
+
+.bottom-0 {
+	bottom: 0;
+}
+
+.absolute-center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+
+/**** Typograhy-related ****/
+.truncate {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.list-reset {
+	margin: 0;
+	list-style: none;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}

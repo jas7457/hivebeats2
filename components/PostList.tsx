@@ -1,44 +1,29 @@
+import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+
+import GraphQL from './GraphQL';
+
+import GET_POSTS_QUERY from '../graphql/queries/GET_POSTS_QUERY';
+import { GET_POSTS } from '../graphql/generated/GET_POSTS';
+import ResponsiveImage from './ResponsiveImage';
 
 export default function PostList() {
-	const { loading, error, data } = useQuery(GET_POSTS_QUERY);
-
-	if (error) return <div>Error</div>;
-	if (loading) return <div>Loading</div>;
-
-	const { posts } = data;
+	const result = useQuery<GET_POSTS>(GET_POSTS_QUERY);
 
 	return (
-		<section>
-			<ul>
-				{posts.nodes.map((post: any, index: number) => (
-					<li key={post.id}>
-						{post.title}
-						<img src={post.featuredImage.sourceUrl} srcSet={post.featuredImage.srcSet} sizes={post.featuredImage.sizes} alt="" />
-					</li>
-				))}
-			</ul>
-		</section>
+		<GraphQL result={result}>
+			{data => (
+				<section>
+					<ul>
+						{data.posts!.nodes!.map(post => (
+							<li key={post!.id}>
+								{post!.title}
+								<ResponsiveImage {...post!.featuredImage!} />
+							</li>
+						))}
+					</ul>
+				</section>
+			)}
+		</GraphQL>
 	);
 }
-
-export const GET_POSTS_QUERY = gql`
-	query getPosts {
-		posts {
-			nodes {
-				id
-				title
-				slug
-				link
-				uri
-				content
-				featuredImage {
-					sizes
-					srcSet
-					sourceUrl
-				}
-			}
-		}
-	}
-`;

@@ -1,0 +1,16 @@
+// my global additions after normalize has been imported
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+img {
+	max-width: 100%;
+}
