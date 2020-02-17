@@ -18,7 +18,7 @@ export default function Layout(props: LayoutProps) {
 }
 
 const StyledLayout = styled.div`
-	min-height: 100vh;
+	height: 100vh;
 `;
 
 interface LayoutProps {

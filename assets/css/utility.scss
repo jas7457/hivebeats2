@@ -23,8 +23,16 @@
 	flex-wrap: wrap;
 }
 
+.flex-no-basis {
+	flex-basis: 0;
+}
+
 .align-center {
 	align-items: center;
+}
+
+.align-end {
+	align-items: flex-end;
 }
 
 .justify-space-between {
@@ -37,6 +45,10 @@
 
 .overflow-hidden {
 	overflow: hidden;
+}
+
+.overflow-y-auto {
+	overflow-y: auto;
 }
 
 .w-full {
@@ -80,8 +92,16 @@
 	left: 0;
 }
 
+.right-0 {
+	right: 0;
+}
+
 .bottom-0 {
 	bottom: 0;
+}
+
+.bottom-100 {
+	bottom: 100%;
 }
 
 .absolute-center {
@@ -100,6 +120,7 @@
 
 .list-reset {
 	margin: 0;
+	padding: 0;
 	list-style: none;
 }
 

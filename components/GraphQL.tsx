@@ -1,7 +1,7 @@
 import React from 'react';
 import { QueryResult } from '@apollo/react-common';
 
-export default function GraphQL<TData = any>(props: GraphQLProps<TData>) {
+export default function GraphQL<TData>(props: GraphQLProps<TData>) {
 	const { result, children } = props;
 	const { loading, error, data } = result;
 
@@ -22,5 +22,5 @@ export default function GraphQL<TData = any>(props: GraphQLProps<TData>) {
 
 interface GraphQLProps<TData> {
 	result: QueryResult<TData>;
-	children: (data: TData) => JSX.Element;
+	children: (data: TData) => JSX.Element | null;
 }
