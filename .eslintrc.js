@@ -39,5 +39,17 @@ module.exports = {
 		'@typescript-eslint/camelcase': 'off',
 		'@typescript-eslint/no-non-null-assertion': 'off',
 		'@typescript-eslint/no-empty-function': 'off'
-	}
+	},
+	overrides: [
+		{
+			// gather all of our js files to turn off some ts rules
+			files: ['*.js'],
+			rules: {
+				'@typescript-eslint/no-var-requires': ['off']
+			},
+			env: {
+				node: true
+			}
+		}
+	]
 };
