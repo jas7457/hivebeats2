@@ -1,18 +1,19 @@
 import React, { useEffect, useContext } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import styled from 'styled-components';
+import Link from 'next/link';
 
+import Container from './layout/Container';
 import GraphQL from './GraphQL';
-import ResponsiveImage from './ResponsiveImage';
 import Text from './Text';
+import ResponsiveBackgroundImage from './ResponsiveBackgroundImage';
+import AspectRatio from './AspectRatio';
 
 import { PlayerContext } from '../contexts/PlayerContext';
 
 import GET_POSTS_QUERY from '../graphql/queries/GET_POSTS_QUERY';
 import { GET_POSTS, GET_POSTS_posts_nodes } from '../graphql/generated/GET_POSTS';
 import Song from '../types/Song';
-import Link from 'next/link';
-import Container from './layout/Container';
 import theme from '../theme';
 
 export default function PostList() {
@@ -49,7 +50,11 @@ function PostListItem(props: GET_POSTS_posts_nodes & { song: Song }) {
 			<Link href="/post/[slug]" as={uri!}>
 				<a>
 					<Text>{title!}</Text>
-					<ResponsiveImage {...featuredImage!} />
+					<AspectRatio ratio={1}>
+						{featuredImage && (
+							<ResponsiveBackgroundImage src={featuredImage.sourceUrl!} srcSet={featuredImage.srcSet} altText={featuredImage.altText} />
+						)}
+					</AspectRatio>
 				</a>
 			</Link>
 		</li>

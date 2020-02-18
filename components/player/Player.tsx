@@ -20,7 +20,7 @@ export default function Player() {
 				{currentSong && (
 					<>
 						<AspectRatio ratio={1} className="player-current-image flex-no-shrink">
-							<BackgroundImage image={currentSong?.artwork} />
+							<BackgroundImage src={currentSong?.artwork} />
 						</AspectRatio>
 						<div className="song-info overflow-hidden">
 							<div className="truncate">{currentSong?.title}</div>

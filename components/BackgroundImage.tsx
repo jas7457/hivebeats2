@@ -3,16 +3,15 @@ import styled from 'styled-components';
 import classNames from 'classnames';
 
 export default function BackgroundImage(props: BackgroundImageProps) {
-	const { image, className, title, children, onClick } = props;
-
-	const _test = 'something';
+	const { src, className, title, children, onClick, altText } = props;
 
 	return (
 		<StyledBackgroundImage
 			className={classNames('relative w-full', className)}
 			title={title}
-			style={{ backgroundImage: `url(${image})` }}
+			style={{ backgroundImage: `url(${src})` }}
 			onClick={onClick}
+			aria-label={altText || undefined}
 		>
 			{children && <div className="absolute w-full h-full">{children}</div>}
 		</StyledBackgroundImage>
@@ -25,9 +24,10 @@ const StyledBackgroundImage = styled.div`
 `;
 
 export interface BackgroundImageProps {
-	image: string;
+	src: string;
 	children?: React.ReactNode;
 	className?: string;
 	title?: string;
+	altText?: string | null;
 	onClick?: (e: React.MouseEvent) => void;
 }

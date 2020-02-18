@@ -15,7 +15,7 @@ export default function Playlist() {
 			{songs.map(song => (
 				<li key={song.stream} className="flex align-center">
 					<AspectRatio className="background-image flex-no-shrink" ratio={1}>
-						<BackgroundImage image={song.artwork}>
+						<BackgroundImage src={song.artwork}>
 							<div className="h-full w-full flex align-center justify-center">
 								<button onClick={() => playSong(song)}>
 									<i className="material-icons play-icon" style={{ fontSize: 35 }}>
