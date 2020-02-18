@@ -17,6 +17,16 @@ const GET_POSTS_BY_SLUG_QUERY = gql`
 						sourceUrl
 						altText
 					}
+					song {
+						artist
+						songTitle
+						streamLink
+						artwork {
+							altText
+							sourceUrl
+							srcSet
+						}
+					}
 				}
 			}
 		}

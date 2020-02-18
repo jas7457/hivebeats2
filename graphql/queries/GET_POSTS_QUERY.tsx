@@ -15,6 +15,16 @@ const GET_POSTS_QUERY = gql`
 					sourceUrl
 					altText
 				}
+				song {
+					artist
+					songTitle
+					streamLink
+					artwork {
+						altText
+						sourceUrl
+						srcSet
+					}
+				}
 			}
 		}
 	}

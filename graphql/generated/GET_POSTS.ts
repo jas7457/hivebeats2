@@ -24,6 +24,31 @@ export interface GET_POSTS_posts_nodes_featuredImage {
 	altText: string | null;
 }
 
+export interface GET_POSTS_posts_nodes_song_artwork {
+	__typename: 'MediaItem';
+	/**
+	 * Alternative text to display when resource is not displayed
+	 */
+	altText: string | null;
+	/**
+	 * Url of the mediaItem
+	 */
+	sourceUrl: string | null;
+	/**
+	 * The srcset attribute specifies the URL of the image to use in different
+	 * situations. It is a comma separated string of urls and their widths.
+	 */
+	srcSet: string | null;
+}
+
+export interface GET_POSTS_posts_nodes_song {
+	__typename: 'Post_Song';
+	artist: string | null;
+	songTitle: string | null;
+	streamLink: string | null;
+	artwork: GET_POSTS_posts_nodes_song_artwork | null;
+}
+
 export interface GET_POSTS_posts_nodes {
 	__typename: 'Post';
 	/**
@@ -56,6 +81,7 @@ export interface GET_POSTS_posts_nodes {
 	 * The featured image for the object
 	 */
 	featuredImage: GET_POSTS_posts_nodes_featuredImage | null;
+	song: GET_POSTS_posts_nodes_song | null;
 }
 
 export interface GET_POSTS_posts {

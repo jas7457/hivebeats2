@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { PlayerContext } from '../../contexts/PlayerContext';
 import AspectRatio from '../AspectRatio';
-import BackgroundImage from '../BackgroundImage';
+import ResponsiveBackgroundImage from '../ResponsiveBackgroundImage';
 
 import theme from '../../theme';
 
@@ -13,9 +13,9 @@ export default function Playlist() {
 	return (
 		<StyledPlaylist className="list-reset">
 			{songs.map(song => (
-				<li key={song.stream} className="flex align-center">
+				<li key={song.streamLink!} className="flex align-center">
 					<AspectRatio className="background-image flex-no-shrink" ratio={1}>
-						<BackgroundImage src={song.artwork}>
+						<ResponsiveBackgroundImage src={song.artwork?.sourceUrl!} srcSet={song.artwork?.srcSet} altText={song.artwork?.altText}>
 							<div className="h-full w-full flex align-center justify-center">
 								<button onClick={() => playSong(song)}>
 									<i className="material-icons play-icon" style={{ fontSize: 35 }}>
@@ -23,10 +23,10 @@ export default function Playlist() {
 									</i>
 								</button>
 							</div>
-						</BackgroundImage>
+						</ResponsiveBackgroundImage>
 					</AspectRatio>
 					<div className="song-info flex-grow flex-shrink overflow-hidden">
-						<div className="truncate">{song.title}</div>
+						<div className="truncate">{song.songTitle}</div>
 						<div className="song-info__artist truncate">{song.artist}</div>
 					</div>
 				</li>

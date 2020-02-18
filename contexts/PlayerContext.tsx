@@ -59,14 +59,14 @@ function reducer(state: PlayerContextValue, action: PlayerAction): PlayerContext
 
 	switch (action.type) {
 		case 'ADD_SONG': {
-			const hasSong = state.songs.some(song => song.stream === action.payload.stream);
+			const hasSong = state.songs.some(song => song.streamLink === action.payload.streamLink);
 			if (hasSong) {
 				return state;
 			}
 
 			// if no songs have loaded, also load this song
 			if (state.songs.length === 0) {
-				load(action.payload.stream);
+				load(action.payload.streamLink!);
 			}
 
 			return {
@@ -77,7 +77,7 @@ function reducer(state: PlayerContextValue, action: PlayerAction): PlayerContext
 		}
 		case 'PLAY_SONG': {
 			// if the user requests to play what is already the current song
-			if (state.currentSong?.stream === action.payload.stream) {
+			if (state.currentSong?.streamLink === action.payload.streamLink) {
 				if (state.isPlaying) {
 					pause();
 					return {
@@ -85,7 +85,7 @@ function reducer(state: PlayerContextValue, action: PlayerAction): PlayerContext
 						isPlaying: false
 					};
 				} else {
-					play(action.payload.stream);
+					play(action.payload.streamLink!);
 					return {
 						...state,
 						isPlaying: true
@@ -93,7 +93,7 @@ function reducer(state: PlayerContextValue, action: PlayerAction): PlayerContext
 				}
 			}
 
-			play(action.payload.stream);
+			play(action.payload.streamLink!);
 			return {
 				...state,
 				currentSong: action.payload,
@@ -116,7 +116,7 @@ function reducer(state: PlayerContextValue, action: PlayerAction): PlayerContext
 			const index = state.songs.indexOf(state.currentSong!);
 			const nextSong = state.songs[index + 1];
 			if (nextSong) {
-				play(nextSong.stream);
+				play(nextSong.streamLink!);
 				return {
 					...state,
 					currentSong: nextSong,
@@ -134,7 +134,7 @@ function reducer(state: PlayerContextValue, action: PlayerAction): PlayerContext
 			const index = state.songs.indexOf(state.currentSong!);
 			const previousSong = state.songs[index - 1];
 			if (previousSong) {
-				play(previousSong.stream);
+				play(previousSong.streamLink!);
 				return {
 					...state,
 					currentSong: previousSong,

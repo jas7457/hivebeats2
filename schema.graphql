@@ -1113,6 +1113,7 @@ type Post implements ContentNode & Node & NodeWithAuthor & NodeWithComments & No
 	): PostToPostConnection
 	"The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table."
 	slug: String
+	song: Post_Song
 	"The current status of the object"
 	status: String
 	"Connection between the post type and the post type"
@@ -1431,6 +1432,15 @@ type PostTypeLabelDetails {
 	viewItem: String
 	"Label for viewing post type archives."
 	viewItems: String
+}
+
+"Field Group"
+type Post_Song {
+	artist: String
+	artwork: MediaItem
+	fieldGroupName: String
+	songTitle: String
+	streamLink: String
 }
 
 "The reading setting type"
@@ -2998,6 +3008,8 @@ enum PostObjectsConnectionOrderbyEnum {
 
 "The status of the object."
 enum PostStatusEnum {
+	#Objects with the acf-disabled status
+	ACF_DISABLED
 	#Objects with the auto-draft status
 	AUTO_DRAFT
 	#Objects with the draft status

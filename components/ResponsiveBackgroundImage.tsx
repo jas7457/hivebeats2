@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useState, useRef } from 'react';
 import BackgroundImage, { BackgroundImageProps } from './BackgroundImage';
 
 export default function ResponsiveBackgroundImage(props: ResponsiveBackgroundImageProps) {
-	const { src, srcSet } = props;
+	const { src, srcSet, children } = props;
 
 	const [currentSrc, setCurrentSrc] = useState(src);
 	const imageRef = useRef<HTMLImageElement | null>(null);
@@ -22,6 +22,7 @@ export default function ResponsiveBackgroundImage(props: ResponsiveBackgroundIma
 	return (
 		<BackgroundImage {...props} src={currentSrc}>
 			<img ref={imageRef} className="display-none" src={src} srcSet={srcSet || undefined} alt="" />
+			{children}
 		</BackgroundImage>
 	);
 }

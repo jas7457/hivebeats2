@@ -36,6 +36,31 @@ export interface GET_POST_BY_SLUG_posts_edges_node_featuredImage {
 	altText: string | null;
 }
 
+export interface GET_POST_BY_SLUG_posts_edges_node_song_artwork {
+	__typename: 'MediaItem';
+	/**
+	 * Alternative text to display when resource is not displayed
+	 */
+	altText: string | null;
+	/**
+	 * Url of the mediaItem
+	 */
+	sourceUrl: string | null;
+	/**
+	 * The srcset attribute specifies the URL of the image to use in different
+	 * situations. It is a comma separated string of urls and their widths.
+	 */
+	srcSet: string | null;
+}
+
+export interface GET_POST_BY_SLUG_posts_edges_node_song {
+	__typename: 'Post_Song';
+	artist: string | null;
+	songTitle: string | null;
+	streamLink: string | null;
+	artwork: GET_POST_BY_SLUG_posts_edges_node_song_artwork | null;
+}
+
 export interface GET_POST_BY_SLUG_posts_edges_node {
 	__typename: 'Post';
 	/**
@@ -58,6 +83,7 @@ export interface GET_POST_BY_SLUG_posts_edges_node {
 	 * The featured image for the object
 	 */
 	featuredImage: GET_POST_BY_SLUG_posts_edges_node_featuredImage | null;
+	song: GET_POST_BY_SLUG_posts_edges_node_song | null;
 }
 
 export interface GET_POST_BY_SLUG_posts_edges {

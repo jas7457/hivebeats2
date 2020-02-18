@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import Playlist from './Playlist';
 import AspectRatio from '../AspectRatio';
-import BackgroundImage from '../BackgroundImage';
+import ResponsiveBackgroundImage from '../ResponsiveBackgroundImage';
 
 import { PlayerContext } from '../../contexts/PlayerContext';
 import theme from '../../theme';
@@ -20,11 +20,11 @@ export default function Player() {
 				{currentSong && (
 					<>
 						<AspectRatio ratio={1} className="player-current-image flex-no-shrink">
-							<BackgroundImage src={currentSong?.artwork} />
+							<ResponsiveBackgroundImage src={currentSong.artwork?.sourceUrl!} srcSet={currentSong?.artwork?.srcSet} />
 						</AspectRatio>
 						<div className="song-info overflow-hidden">
-							<div className="truncate">{currentSong?.title}</div>
-							<div className="song-info__artist truncate">{currentSong?.artist}</div>
+							<div className="truncate">{currentSong?.songTitle}</div>
+							<div className="song-info__artist truncate">{currentSong.artist}</div>
 						</div>
 					</>
 				)}
