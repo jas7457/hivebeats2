@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useRef } from 'react';
+import React, { useLayoutEffect, useState, useRef, useEffect } from 'react';
 import BackgroundImage, { BackgroundImageProps } from './BackgroundImage';
 
 export default function ResponsiveBackgroundImage(props: ResponsiveBackgroundImageProps) {
@@ -6,6 +6,10 @@ export default function ResponsiveBackgroundImage(props: ResponsiveBackgroundIma
 
 	const [currentSrc, setCurrentSrc] = useState(src);
 	const imageRef = useRef<HTMLImageElement | null>(null);
+
+	useEffect(() => {
+		setCurrentSrc(src);
+	}, [src]);
 
 	useLayoutEffect(() => {
 		if (!srcSet || !imageRef.current) {

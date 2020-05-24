@@ -1,18 +1,30 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 import classNames from 'classnames';
 
 import Playlist from './Playlist';
 import AspectRatio from '../AspectRatio';
 import ResponsiveBackgroundImage from '../ResponsiveBackgroundImage';
+import Animation from '../Animation';
 
 import { PlayerContext } from '../../contexts/PlayerContext';
 import theme from '../../theme';
+
+import fadeIn from '../../animations/fadeIn';
+import useClickOutside from '../../hooks/useClickOutside';
 
 export default function Player() {
 	const { songs, isPlaying, currentSong, playSong, nextSong, previousSong } = useContext(PlayerContext);
 
 	const [isPlaylistOpen, setIsPlaylistOpen] = useState(false);
+	const playlistRef = useRef<HTMLElement | undefined>(undefined);
+
+	useClickOutside(playlistRef, () => {
+		// TODO - figure out the click outside
+		if (isPlaylistOpen) {
+			// setIsPlaylistOpen(false);
+		}
+	});
 
 	return (
 		<StyledPlayer className="flex align-center">
@@ -52,6 +64,8 @@ export default function Player() {
 
 			<div className="flex flex-no-shrink flex-grow flex-no-basis align-end relative">
 				<StyledButton
+					// @ts-ignore
+					ref={(playlistRef as unknown) as HTMLElement}
 					className={classNames('playlist-button ml-auto', { 'is-active': isPlaylistOpen })}
 					onClick={() => setIsPlaylistOpen(!isPlaylistOpen)}
 					title="Playlist"
@@ -61,11 +75,11 @@ export default function Player() {
 					</i>
 				</StyledButton>
 
-				{isPlaylistOpen && (
+				<Animation animation={fadeIn} usingIntersectionObserver={false} reverse={!isPlaylistOpen}>
 					<div className="playlist-container absolute right-0">
 						<Playlist />
 					</div>
-				)}
+				</Animation>
 			</div>
 		</StyledPlayer>
 	);
