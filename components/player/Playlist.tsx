@@ -1,5 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import styled from 'styled-components';
+
+import useClickOutside from '../../hooks/useClickOutside';
 
 import { PlayerContext } from '../../contexts/PlayerContext';
 import AspectRatio from '../AspectRatio';
@@ -8,11 +10,19 @@ import ResponsiveBackgroundImage from '../ResponsiveBackgroundImage';
 
 import theme from '../../theme';
 
-export default function Playlist() {
+export default function Playlist({ close, buttonRef }: PlaylistProps) {
 	const { songs, currentSong, playSong, isPlaying } = useContext(PlayerContext);
+	const playlistRef = useRef<any>(undefined);
+
+	useClickOutside(playlistRef, (e) => {
+		// this makes it so that clicks on the button do not close and then immediately open the playlist again
+		if (!buttonRef.current.contains(e.target as HTMLElement)) {
+			close();
+		}
+	});
 
 	return (
-		<StyledPlaylist>
+		<StyledPlaylist ref={playlistRef}>
 			<Card className="card-container flex flex-column" rounded="sm">
 				{currentSong && (
 					<AspectRatio className="flex-no-shrink" ratio={4 / 16}>
@@ -26,7 +36,7 @@ export default function Playlist() {
 				)}
 
 				<ul className="flex-shrink list-reset overflow-y-auto">
-					{songs.map(song => (
+					{songs.map((song) => (
 						<li key={song.streamLink!} className="flex align-center">
 							<AspectRatio className="background-image flex-no-shrink" ratio={1}>
 								<ResponsiveBackgroundImage
@@ -53,6 +63,11 @@ export default function Playlist() {
 			</Card>
 		</StyledPlaylist>
 	);
+}
+
+interface PlaylistProps {
+	close: () => void;
+	buttonRef: React.MutableRefObject<HTMLButtonElement>;
 }
 
 const StyledPlaylist = styled.div`

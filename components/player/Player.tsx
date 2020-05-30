@@ -1,6 +1,7 @@
 import React, { useContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 import classNames from 'classnames';
+import Link from 'next/link';
 
 import Playlist from './Playlist';
 import AspectRatio from '../AspectRatio';
@@ -11,29 +12,25 @@ import { PlayerContext } from '../../contexts/PlayerContext';
 import theme from '../../theme';
 
 import fadeIn from '../../animations/fadeIn';
-import useClickOutside from '../../hooks/useClickOutside';
 
 export default function Player() {
 	const { songs, isPlaying, currentSong, playSong, nextSong, previousSong } = useContext(PlayerContext);
 
 	const [isPlaylistOpen, setIsPlaylistOpen] = useState(false);
-	const playlistRef = useRef<HTMLElement | undefined>(undefined);
-
-	useClickOutside(playlistRef, () => {
-		// TODO - figure out the click outside
-		if (isPlaylistOpen) {
-			// setIsPlaylistOpen(false);
-		}
-	});
+	const playlistRef = useRef<HTMLButtonElement>(undefined as any);
 
 	return (
 		<StyledPlayer className="flex align-center">
 			<div className="flex align-center flex-no-shrink flex-grow flex-no-basis mr-auto overflow-hidden">
 				{currentSong && (
 					<>
-						<AspectRatio ratio={1} className="player-current-image flex-no-shrink">
-							<ResponsiveBackgroundImage src={currentSong.artwork?.sourceUrl!} srcSet={currentSong?.artwork?.srcSet} />
-						</AspectRatio>
+						<Link href="/post/[slug]" as={`/${currentSong.postLink!}`}>
+							<a className="block" title={`View ${[currentSong.songTitle, currentSong.artist].filter((a) => a).join(' - ')}`}>
+								<AspectRatio ratio={1} className="player-current-image flex-no-shrink">
+									<ResponsiveBackgroundImage src={currentSong.artwork?.sourceUrl!} srcSet={currentSong?.artwork?.srcSet} />
+								</AspectRatio>
+							</a>
+						</Link>
 						<div className="song-info overflow-hidden">
 							<div className="truncate">{currentSong?.songTitle}</div>
 							<div className="song-info__artist truncate">{currentSong.artist}</div>
@@ -64,8 +61,7 @@ export default function Player() {
 
 			<div className="flex flex-no-shrink flex-grow flex-no-basis align-end relative">
 				<StyledButton
-					// @ts-ignore
-					ref={(playlistRef as unknown) as HTMLElement}
+					ref={playlistRef}
 					className={classNames('playlist-button ml-auto', { 'is-active': isPlaylistOpen })}
 					onClick={() => setIsPlaylistOpen(!isPlaylistOpen)}
 					title="Playlist"
@@ -77,7 +73,7 @@ export default function Player() {
 
 				<Animation animation={fadeIn} usingIntersectionObserver={false} reverse={!isPlaylistOpen}>
 					<div className="playlist-container absolute right-0">
-						<Playlist />
+						<Playlist close={() => setIsPlaylistOpen(false)} buttonRef={playlistRef} />
 					</div>
 				</Animation>
 			</div>

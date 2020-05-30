@@ -20,11 +20,11 @@ export default function PostList() {
 
 	return (
 		<GraphQL result={result}>
-			{data => (
+			{(data) => (
 				<Container>
 					<section>
-						<StyledPostList className="list-reset flex flex-wrap">
-							{data.posts!.nodes!.map(post => (
+						<StyledPostList className="flex flex-wrap list-reset">
+							{data.posts!.nodes!.map((post) => (
 								<PostListItem key={post!.id} {...post!} />
 							))}
 						</StyledPostList>
@@ -44,13 +44,13 @@ function PostListItem(props: GET_POSTS_posts_nodes) {
 		if (!song) {
 			return;
 		}
-		addSong(song);
+		addSong({ ...song, postLink: uri });
 	}, [addSong, song]);
 
 	return (
 		<li>
-			<Link href="/post/[slug]" as={uri!}>
-				<a>
+			<Link href="/post/[slug]" as={`/${uri!}`}>
+				<a className="block">
 					<Text>{title!}</Text>
 					<AspectRatio ratio={1}>
 						{featuredImage && (
@@ -65,7 +65,7 @@ function PostListItem(props: GET_POSTS_posts_nodes) {
 
 const StyledPostList = styled.ul`
 	& > li {
-		width: 50%;
+		width: 33%;
 		padding: 0 ${theme.dimensions['2']};
 	}
 `;
